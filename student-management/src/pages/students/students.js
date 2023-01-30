@@ -4,6 +4,7 @@ import * as studentsApi from "../../utils/studentsApi";
 
 export default function Students() {
   const [students, setStudents] = useState([]);
+  const [newStudent, setNewStudent] = useState(false);
   const [error, setError] = useState();
   const [dateError, setDateError] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -31,11 +32,16 @@ export default function Students() {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    studentsApi.createNewStudents({
-      firstName: firstName,
-      familyName: familyName,
-      dateOfBirth: dateOfBirth,
-    });
+    studentsApi
+      .createNewStudents({
+        firstName: firstName,
+        familyName: familyName,
+        dateOfBirth: dateOfBirth,
+      })
+      .then(() => {
+        setNewStudent(true);
+        alert("Student Added");
+      });
   }
 
   return (
