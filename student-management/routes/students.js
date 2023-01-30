@@ -3,6 +3,6 @@ const router = express.Router();
 const studentsCtrl = require("../controller/students");
 
 //get students
-router.get("/allstudents", studentsCtrl.allStudents);
+router.get("/", studentsCtrl.getStudents);
 
 module.exports = router;
