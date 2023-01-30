@@ -10,7 +10,6 @@ import Results from "./pages/results/results";
 function App() {
   return (
     <>
-      <div className="App">ShyftLabs.io</div>
       <div className="main">
         <NavigationPanel />
         <div className="pages">

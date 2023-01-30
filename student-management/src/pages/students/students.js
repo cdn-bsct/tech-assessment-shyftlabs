@@ -58,7 +58,6 @@ export default function Students() {
     setFirstName("");
     setFamilyName("");
     setDateOfBirth("");
-    console.log(firstName, familyName);
   }
 
   return (
@@ -99,20 +98,24 @@ export default function Students() {
       {/* student table display */}
       <div>
         <table>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Date of Birth</th>
-          </tr>
-          {students.map((s) => {
-            return (
-              <tr>
-                <td>{s.firstName}</td>
-                <td>{s.familyName}</td>
-                <td>{s.dateOfBirth}</td>
-              </tr>
-            );
-          })}
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Date of Birth</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((s) => {
+              return (
+                <tr>
+                  <td>{s.firstName}</td>
+                  <td>{s.familyName}</td>
+                  <td>{s.dateOfBirth}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </>

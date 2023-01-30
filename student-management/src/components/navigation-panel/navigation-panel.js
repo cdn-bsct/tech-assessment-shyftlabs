@@ -7,7 +7,7 @@ export default function NavigationPanel() {
   return (
     <>
       <div className="nav-container">
-        <div className="nav-header">Student Management</div>
+        <div className="nav-header">Navigation</div>
         <div className="navlink-container">
           <Link title="Home" destination="/" />
           <Link title="Students" destination="/students" />

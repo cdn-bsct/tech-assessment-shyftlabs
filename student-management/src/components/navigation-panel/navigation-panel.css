@@ -1,11 +1,12 @@
 .nav-container {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 10px;
   width: 20%;
   height: 95vh;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-radius: 10px;
 }
 
 .nav-header {
