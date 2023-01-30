@@ -6,7 +6,7 @@ export default function Students() {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState(false);
   const [error, setError] = useState();
-  const [dateError, setDateError] = useState(false);
+  const [dateError, setDateError] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [familyName, setFamilyName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -24,10 +24,17 @@ export default function Students() {
     if (e.target.name === "firstName") setFirstName(e.target.value);
     if (e.target.name === "familyName") setFamilyName(e.target.value);
     if (e.target.name === "dateOfBirth") {
-      setDateError(false);
-      setDateOfBirth(e.target.value);
-    } else {
-      setDateError(true);
+      let d = new Date(Date.now());
+      let currentYear = d.getFullYear();
+      let date = new Date(e.target.value);
+      let result = currentYear - date.getFullYear();
+      if (result >= 10) {
+        setDateError(false);
+        setDateOfBirth(e.target.value);
+      } else {
+        setDateError(true);
+        alert("child must be 10 years old");
+      }
     }
   }
 
