@@ -2,17 +2,26 @@ const Students = require("../models/Students");
 
 module.exports = {
   getStudents,
+  createStudents,
 };
 
 async function getStudents(req, res) {
   try {
-    console.log("hello");
     const allStudents = await Students.find({});
-    req.status(200);
-    req.json(allStudents);
+    res.status(200);
+    res.json(allStudents);
   } catch (err) {
-    console.log(err);
     res.status(400);
     res.json({ error: err });
+  }
+}
+
+async function createStudents(req, res) {
+  try {
+    let data = await Students.createStudent(req);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).json({ error: err });
+    console.log(err);
   }
 }

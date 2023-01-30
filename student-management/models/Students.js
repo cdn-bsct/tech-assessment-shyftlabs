@@ -12,7 +12,7 @@ const studentsSchema = new Schema(
       required: true,
     },
     dateOfBirth: {
-      type: Date,
+      type: String,
       required: true,
     },
   },
@@ -20,5 +20,15 @@ const studentsSchema = new Schema(
     timestamps: true,
   }
 );
+
+studentsSchema.statics.createStudent = async function (req) {
+  let { firstName, familyName, dateOfBirth } = req.body;
+  this.create({
+    firstName: firstName,
+    familyName: familyName,
+    dateOfBirth: dateOfBirth,
+  });
+  return "Student created";
+};
 
 module.exports = mongoose.model("Students", studentsSchema);

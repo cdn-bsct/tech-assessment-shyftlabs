@@ -3,33 +3,82 @@ import { useState, useEffect } from "react";
 import * as studentsApi from "../../utils/studentsApi";
 
 export default function Students() {
-  const [students, setStudents] = useState();
+  const [students, setStudents] = useState([]);
   const [error, setError] = useState();
+  const [dateError, setDateError] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [familyName, setFamilyName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
-  async function getAll() {
-    try {
-      let allStudents = await studentsApi.getAllStudents();
+  useEffect(function () {
+    const getAll = async () => {
+      const allStudents = await studentsApi.getAllStudents();
       setStudents(allStudents);
-      console.log(allStudents);
-    } catch (err) {
-      setError(err);
+    };
+    getAll();
+  }, []);
+
+  function handleOnChange(e) {
+    if (e.target.name === "firstName") setFirstName(e.target.value);
+    if (e.target.name === "familyName") setFamilyName(e.target.value);
+    if (e.target.name === "dateOfBirth") {
+      setDateError(false);
+      setDateOfBirth(e.target.value);
+    } else {
+      setDateError(true);
     }
   }
 
-  useEffect(() => {
-    getAll();
-  }, []);
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+    await studentsApi.createNewStudents(firstName, familyName, dateOfBirth);
+  }
 
   return (
     <>
       <div className="students-header"> All Students</div>
+      <hr />
       {/* student addition form */}
+      <form onSubmit={handleOnSubmit}>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          onChange={handleOnChange}
+        />
+        <input
+          type="text"
+          name="familyName"
+          placeholder="Family Name"
+          onChange={handleOnChange}
+        />
+        <input type="date" name="dateOfBirth" onChange={handleOnChange} />
+        <input
+          type="submit"
+          value="Submit"
+          disabled={dateError ? true : false}
+        />
+      </form>
+      <hr />
       {/* student table display */}
-      {students ? (
-        <div> there are no students to display</div>
-      ) : (
-        <div>{students}</div>
-      )}
+      <div>
+        <table>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+          </tr>
+          {students.map((s) => {
+            return (
+              <tr>
+                <td>{s.firstName}</td>
+                <td>{s.familyName}</td>
+                <td>{s.dateOfBirth}</td>
+              </tr>
+            );
+          })}
+        </table>
+      </div>
     </>
   );
 }
