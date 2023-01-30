@@ -9,7 +9,7 @@ export default function Students() {
   const [dateError, setDateError] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [familyName, setFamilyName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(Date(Date.now().toString));
 
   useEffect(() => {
     getAll();
@@ -24,10 +24,9 @@ export default function Students() {
     if (e.target.name === "firstName") setFirstName(e.target.value);
     if (e.target.name === "familyName") setFamilyName(e.target.value);
     if (e.target.name === "dateOfBirth") {
-      let d = new Date(Date.now());
-      let currentYear = d.getFullYear();
-      let date = new Date(e.target.value);
-      let result = currentYear - date.getFullYear();
+      let currentYear = new Date(Date.now()).getFullYear();
+      let date = new Date(e.target.value).getFullYear();
+      let result = currentYear - date;
       if (result >= 10) {
         setDateError(false);
         setDateOfBirth(e.target.value);
@@ -51,7 +50,15 @@ export default function Students() {
         alert("Student Added");
       });
 
+    resetFields();
     getAll();
+  }
+
+  function resetFields() {
+    setFirstName("");
+    setFamilyName("");
+    setDateOfBirth("");
+    console.log(firstName, familyName);
   }
 
   return (
@@ -64,15 +71,24 @@ export default function Students() {
           type="text"
           name="firstName"
           placeholder="First Name"
+          value={firstName}
+          autoComplete="off"
           onChange={handleOnChange}
         />
         <input
           type="text"
           name="familyName"
           placeholder="Family Name"
+          value={familyName}
           onChange={handleOnChange}
         />
-        <input type="date" name="dateOfBirth" onChange={handleOnChange} />
+        <input
+          type="date"
+          name="dateOfBirth"
+          autoComplete="off"
+          value={dateOfBirth}
+          onChange={handleOnChange}
+        />
         <input
           type="submit"
           value="Submit"
