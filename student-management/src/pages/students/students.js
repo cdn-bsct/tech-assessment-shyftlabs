@@ -31,7 +31,11 @@ export default function Students() {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    await studentsApi.createNewStudents(firstName, familyName, dateOfBirth);
+    studentsApi.createNewStudents({
+      firstName: firstName,
+      familyName: familyName,
+      dateOfBirth: dateOfBirth,
+    });
   }
 
   return (

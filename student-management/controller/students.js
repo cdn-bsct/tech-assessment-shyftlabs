@@ -17,6 +17,7 @@ async function getStudents(req, res) {
 }
 
 async function createStudents(req, res) {
+  console.log(req.body);
   try {
     let data = await Students.createStudent(req);
     res.status(200).json(data);
