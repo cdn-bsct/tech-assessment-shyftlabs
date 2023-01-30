@@ -11,13 +11,14 @@ export default function Students() {
   const [familyName, setFamilyName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
 
-  useEffect(function () {
-    const getAll = async () => {
-      const allStudents = await studentsApi.getAllStudents();
-      setStudents(allStudents);
-    };
+  useEffect(() => {
     getAll();
   }, []);
+
+  async function getAll() {
+    const allStudents = await studentsApi.getAllStudents();
+    setStudents(allStudents);
+  }
 
   function handleOnChange(e) {
     if (e.target.name === "firstName") setFirstName(e.target.value);
@@ -32,7 +33,7 @@ export default function Students() {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    studentsApi
+    await studentsApi
       .createNewStudents({
         firstName: firstName,
         familyName: familyName,
@@ -42,6 +43,8 @@ export default function Students() {
         setNewStudent(true);
         alert("Student Added");
       });
+
+    getAll();
   }
 
   return (
