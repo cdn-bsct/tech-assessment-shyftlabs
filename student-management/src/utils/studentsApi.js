@@ -10,6 +10,7 @@ export async function createNewStudents(props) {
     res.json()
   );
 }
+
 // helper functions
 function getStudents() {
   return {

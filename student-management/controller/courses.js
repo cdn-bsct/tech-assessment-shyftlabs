@@ -7,7 +7,6 @@ module.exports = {
 
 async function getCourses(req, res) {
   try {
-    console.log("hello");
     const allCourses = await Courses.find({});
     res.status(200).json(allCourses);
   } catch (err) {

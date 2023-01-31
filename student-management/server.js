@@ -14,6 +14,7 @@ app.use(express.json());
 // API routes below
 app.use("/api/students", require("./routes/students"));
 app.use("/api/courses", require("./routes/courses"));
+app.use("/api/results", require("./routes/results"));
 
 const port = process.env.PORT || 3001;
 
