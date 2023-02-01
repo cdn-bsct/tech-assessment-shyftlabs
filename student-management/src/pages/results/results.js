@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import * as resultsApi from "../../utils/resultsApi";
 
-export default function Results({ students, courses }) {
+export default function Results({ students, courses, getStudents }) {
   const [results, setResults] = useState([]);
   const [studentChoice, setStudentChoice] = useState("");
   const [courseChoice, setCourseChoice] = useState("");
@@ -24,6 +24,8 @@ export default function Results({ students, courses }) {
   function handleGradeChange(e) {
     setGradeChoice(e.target.value);
   }
+
+  // -------------- Submit create request ----------------
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -49,6 +51,7 @@ export default function Results({ students, courses }) {
 
   useEffect(() => {
     getResults();
+    getStudents();
   }, []);
   return (
     <>

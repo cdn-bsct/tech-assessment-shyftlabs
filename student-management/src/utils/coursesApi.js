@@ -10,14 +10,14 @@ export async function createNewCourse(props) {
   );
 }
 
-// helper functions
+// helper functions --- to make code more readable for fetch requests
+
 function getCourses() {
   return {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    // mode: "no-cors",
   };
 }
 

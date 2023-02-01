@@ -5,6 +5,7 @@ module.exports = {
   createStudents,
 };
 
+// retreive all students from the database
 async function getStudents(req, res) {
   try {
     const allStudents = await Students.find({});
@@ -14,6 +15,7 @@ async function getStudents(req, res) {
   }
 }
 
+// add a new student into the database
 async function createStudents(req, res) {
   try {
     let data = await Students.createStudent(req);

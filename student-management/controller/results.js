@@ -7,6 +7,7 @@ module.exports = {
   addResults,
 };
 
+// retrieve all data from database and populate reference schemas
 async function getResults(req, res) {
   try {
     let results = await Result.find({}).populate("student").populate("course");
@@ -17,6 +18,7 @@ async function getResults(req, res) {
   }
 }
 
+// add new result into database
 async function addResults(req, res) {
   try {
     let student = await Student.findById(req.body.student);

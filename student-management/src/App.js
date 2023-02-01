@@ -15,6 +15,7 @@ function App() {
   const [students, setStudents] = useState([]);
   const [courses, setCourses] = useState([]);
 
+  // ------- functions to pass down props to pages ----
   async function getstudents() {
     let data = await studentsApi.getAllStudents();
     setStudents(data);
@@ -43,7 +44,13 @@ function App() {
             <Route path="/courses" element={<Courses courses={courses} />} />
             <Route
               path="/results"
-              element={<Results students={students} courses={courses} />}
+              element={
+                <Results
+                  students={students}
+                  courses={courses}
+                  getStudents={getstudents}
+                />
+              }
             />
           </Routes>
         </div>
