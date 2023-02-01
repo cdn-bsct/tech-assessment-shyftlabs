@@ -10,7 +10,7 @@ async function getStudents(req, res) {
     const allStudents = await Students.find({});
     res.status(200).json(allStudents);
   } catch (err) {
-    res.status(400).json({ error: err });
+    res.status(400).json(err);
   }
 }
 
@@ -19,7 +19,6 @@ async function createStudents(req, res) {
     let data = await Students.createStudent(req);
     res.status(200).json(data);
   } catch (err) {
-    res.status(400).json({ error: err });
-    console.log(err);
+    res.status(400).json(err);
   }
 }

@@ -6,6 +6,8 @@ export async function getAllResults() {
   return await fetch(`${BASE_URL}`, getResults()).then((res) => res.json());
 }
 
+// add new results
+
 export async function createResult(props) {
   return await fetch(`${BASE_URL}/create`, addResults(props)).then((res) =>
     res.json()

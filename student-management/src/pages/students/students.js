@@ -4,8 +4,6 @@ import * as studentsApi from "../../utils/studentsApi";
 
 export default function Students(props) {
   const [students, setStudents] = useState([]);
-  const [newStudent, setNewStudent] = useState(false);
-  const [error, setError] = useState();
   const [dateError, setDateError] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [familyName, setFamilyName] = useState("");
@@ -45,9 +43,12 @@ export default function Students(props) {
         familyName: familyName,
         dateOfBirth: dateOfBirth,
       })
-      .then(() => {
-        setNewStudent(true);
-        alert("Student Added");
+      .then((err) => {
+        if (!err) {
+          alert(`${err.name}: ${err.message}`);
+        } else {
+          alert("Student Added");
+        }
       });
 
     setFirstName("");

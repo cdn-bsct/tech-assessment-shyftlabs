@@ -18,10 +18,9 @@ async function getResults(req, res) {
 }
 
 async function addResults(req, res) {
-  let student = await Student.findById(req.body.student);
-  let course = await Course.findById(req.body.course);
-
   try {
+    let student = await Student.findById(req.body.student);
+    let course = await Course.findById(req.body.course);
     let newResult = await Result.create({
       student: student._id,
       course: course._id,
@@ -29,7 +28,6 @@ async function addResults(req, res) {
     });
     res.status(200).json(newResult);
   } catch (err) {
-    res.status(400).json({ Error: err });
-    console.log(err);
+    res.status(400).json(err);
   }
 }

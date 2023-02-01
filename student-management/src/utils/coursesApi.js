@@ -9,8 +9,8 @@ export async function createNewCourse(props) {
     res.json()
   );
 }
-// helper functions
 
+// helper functions
 function getCourses() {
   return {
     headers: {

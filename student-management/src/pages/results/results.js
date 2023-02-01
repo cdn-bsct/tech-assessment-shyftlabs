@@ -27,14 +27,18 @@ export default function Results({ students, courses }) {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    let data = await resultsApi
+    await resultsApi
       .createResult({
         student: studentChoice,
         course: courseChoice,
         grade: gradeChoice,
       })
-      .then(() => {
-        alert("Student Added");
+      .then((err) => {
+        if (!err.name) {
+          alert("Results Added");
+        } else {
+          alert(`${err.name}: ${err.message}`);
+        }
       });
 
     setStudentChoice("");
