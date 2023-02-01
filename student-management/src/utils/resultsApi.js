@@ -24,13 +24,13 @@ function getResults() {
   };
 }
 
-function addResults({ firstName, familyName, course, grade }) {
+function addResults({ student, course, grade }) {
   return {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ firstName, familyName, course, grade }),
+    body: JSON.stringify({ student, course, grade }),
   };
 }

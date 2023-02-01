@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import * as studentsApi from "../../utils/studentsApi";
 
-export default function Students() {
+export default function Students(props) {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState(false);
   const [error, setError] = useState();
@@ -50,14 +50,10 @@ export default function Students() {
         alert("Student Added");
       });
 
-    resetFields();
-    getAll();
-  }
-
-  function resetFields() {
     setFirstName("");
     setFamilyName("");
     setDateOfBirth("");
+    getAll();
   }
 
   return (
@@ -108,7 +104,7 @@ export default function Students() {
           <tbody>
             {students.map((s) => {
               return (
-                <tr>
+                <tr key={s._id}>
                   <td>{s.firstName}</td>
                   <td>{s.familyName}</td>
                   <td>{s.dateOfBirth}</td>

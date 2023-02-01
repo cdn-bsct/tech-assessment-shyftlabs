@@ -55,7 +55,7 @@ export default function Courses() {
           <tbody>
             {courses.map((c) => {
               return (
-                <tr>
+                <tr key={c._id}>
                   <td>{c.name}</td>
                 </tr>
               );

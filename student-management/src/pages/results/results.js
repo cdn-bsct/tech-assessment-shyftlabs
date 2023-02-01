@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import * as studentsApi from "../../utils/studentsApi";
-import * as coursesApi from "../../utils/coursesApi";
 import * as resultsApi from "../../utils/resultsApi";
 
-export default function Results() {
-  const [students, setStudents] = useState([]);
-  const [courses, setCourses] = useState([]);
+export default function Results({ students, courses }) {
   const [results, setResults] = useState([]);
   const [studentChoice, setStudentChoice] = useState("");
   const [courseChoice, setCourseChoice] = useState("");
   const [gradeChoice, setGradeChoice] = useState("");
 
-  // -------------- Populate Dropdown Menus ---------------
-  async function getstudents() {
-    let data = await studentsApi.getAllStudents();
-    setStudents(data);
-  }
-
-  async function getCourses() {
-    let data = await coursesApi.getAllCourses();
-    setCourses(data);
-  }
   // --------------- Populate Main Results Table -----------
   async function getResults() {
     let data = await resultsApi.getAllResults();
@@ -41,11 +27,9 @@ export default function Results() {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    let name = studentChoice.split(" ");
     let data = await resultsApi
       .createResult({
-        firstName: name[0],
-        familyName: name[1],
+        student: studentChoice,
         course: courseChoice,
         grade: gradeChoice,
       })
@@ -60,12 +44,8 @@ export default function Results() {
   }
 
   useEffect(() => {
-    getstudents();
-    getCourses();
     getResults();
   }, []);
-  // -------------- finding Students by ID --------
-
   return (
     <>
       <h1>Results Page</h1>
@@ -81,7 +61,12 @@ export default function Results() {
         >
           <option>--Please Select--</option>
           {students.map((s) => {
-            return <option>{`${s.firstName} ${s.familyName}`}</option>;
+            return (
+              <option
+                value={s._id}
+                key={s._id}
+              >{`${s.firstName} ${s.familyName}`}</option>
+            );
           })}
         </select>
         <select
@@ -94,7 +79,11 @@ export default function Results() {
         >
           <option>--Please Select--</option>
           {courses.map((c) => {
-            return <option>{c.name}</option>;
+            return (
+              <option value={c._id} key={c._id}>
+                {c.name}
+              </option>
+            );
           })}
         </select>
         <select
@@ -127,9 +116,9 @@ export default function Results() {
         <tbody>
           {results.map((r) => {
             return (
-              <tr>
-                <td>{r.course}</td>
-                <td>{r.student}</td>
+              <tr key={r._id}>
+                <td>{r.course.name}</td>
+                <td>{`${r.student.firstName} ${r.student.familyName}`}</td>
                 <td>{r.grade}</td>
               </tr>
             );
