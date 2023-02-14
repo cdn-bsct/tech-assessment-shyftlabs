@@ -16,7 +16,7 @@ app.use("/api/students", require("./routes/students"));
 app.use("/api/courses", require("./routes/courses"));
 app.use("/api/results", require("./routes/results"));
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 app.listen(3001, function () {
   console.log(`Express app running on port ${port}`);
