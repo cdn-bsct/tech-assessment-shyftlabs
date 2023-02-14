@@ -22,6 +22,6 @@ app.use("/api/results", require("./routes/results"));
 
 const port = process.env.PORT || 3001;
 
-app.listen(3001, function () {
+app.listen(port, function () {
   console.log(`Express app running on port ${port}`);
 });
