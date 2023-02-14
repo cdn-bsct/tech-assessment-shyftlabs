@@ -40,13 +40,21 @@ export default function Results({
         course: courseChoice,
         grade: gradeChoice,
       })
-      .then((err) => {
-        if (!err.name) {
-          alert("Results Added");
+      .then((data) => {
+        console.log(data);
+        if (data.name === "CastError") {
+          alert(data.message);
         } else {
-          alert(`${err.name}: ${err.message}`);
+          alert(data);
         }
       });
+    // .then((err) => {
+    //   if (!err.name) {
+    //     alert("Results Added");
+    //   } else {
+    //     alert(`${err.name}: ${err.message}`);
+    //   }
+    // });
 
     setStudentChoice("");
     setCourseChoice("");

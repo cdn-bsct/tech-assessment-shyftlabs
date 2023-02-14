@@ -23,13 +23,28 @@ async function addResults(req, res) {
   try {
     let student = await Student.findById(req.body.student);
     let course = await Course.findById(req.body.course);
-    let newResult = await Result.create({
-      student: student._id,
-      course: course._id,
-      grade: req.body.grade,
+    let existingResult = await Result.find({
+      student: student,
+      course: course,
     });
-    res.status(200).json(newResult);
+
+    if (existingResult.length === 0) {
+      let newResult = await Result.create({
+        student: student._id,
+        course: course._id,
+        grade: req.body.grade,
+      });
+      let returnMsg = "Student Successfully Added";
+      res.status(200).json(returnMsg);
+    } else {
+      let returnMsg = "This student already has a grade for this class";
+      res.status(200).json(returnMsg);
+    }
   } catch (err) {
     res.status(400).json(err);
   }
 }
+
+//in the results
+//only add unique results.
+// no duplicates.
