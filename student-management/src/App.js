@@ -49,6 +49,7 @@ function App() {
                   students={students}
                   courses={courses}
                   getStudents={getstudents}
+                  getCourses={getCourses}
                 />
               }
             />

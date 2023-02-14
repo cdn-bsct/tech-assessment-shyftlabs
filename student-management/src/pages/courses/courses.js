@@ -22,7 +22,8 @@ export default function Courses() {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    await coursesApi.createNewCourse({ name: courseName }).then((err) => {
+    let course = courseName.trim();
+    await coursesApi.createNewCourse({ name: course }).then((err) => {
       if (!err.name) {
         alert("Course Added");
       } else {

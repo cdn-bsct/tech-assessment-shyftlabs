@@ -22,10 +22,13 @@ export default function Students(props) {
     if (e.target.name === "firstName") setFirstName(e.target.value);
     if (e.target.name === "familyName") setFamilyName(e.target.value);
     if (e.target.name === "dateOfBirth") {
-      let currentYear = new Date(Date.now()).getFullYear();
-      let date = new Date(e.target.value).getFullYear();
-      let result = currentYear - date;
-      if (result >= 10) {
+      let currentYear = new Date(Date.now());
+      let limitDate = new Date(
+        currentYear.setFullYear(currentYear.getFullYear() - 10)
+      );
+      let chosenYear = new Date(e.target.value);
+
+      if (limitDate.getTime() > chosenYear.getTime()) {
         setDateError(false);
         setDateOfBirth(e.target.value);
       } else {

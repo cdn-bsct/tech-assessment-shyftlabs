@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import * as resultsApi from "../../utils/resultsApi";
 
-export default function Results({ students, courses, getStudents }) {
+export default function Results({
+  students,
+  courses,
+  getStudents,
+  getCourses,
+}) {
   const [results, setResults] = useState([]);
   const [studentChoice, setStudentChoice] = useState("");
   const [courseChoice, setCourseChoice] = useState("");
@@ -52,6 +57,7 @@ export default function Results({ students, courses, getStudents }) {
   useEffect(() => {
     getResults();
     getStudents();
+    getCourses();
   }, []);
   return (
     <>
