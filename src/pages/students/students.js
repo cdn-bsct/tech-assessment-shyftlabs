@@ -96,7 +96,7 @@ export default function Students(props) {
       </form>
       <hr />
       {/* student table display */}
-      <div>
+      <div className="table-container">
         <table>
           <thead>
             <tr>
